@@ -2,7 +2,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class UniformDiscreteProbabilityDistributionTest {
 
@@ -11,12 +12,47 @@ class UniformDiscreteProbabilityDistributionTest {
     }
 
     @Test
-    void greaterThanOne(){
-        UniformDiscreteProbabilityDistribution<Double> udpd = new UniformDiscreteProbabilityDistribution<>(
-                Arrays.asList(0.1, 0.2, 1.3),
-                Arrays.asList(0.1, 0.2, 1.3)
-        );
+    void sizeMismatch() {
+        assertThrows(IllegalArgumentException.class, ()-> {
+            new UniformDiscreteProbabilityDistribution<>(
+                    Arrays.asList(0.1, 0.2, 0.7),
+                    Arrays.asList(0.1, 0.2, 0.3, 0.4)
+            );
+        });
+    }
 
+    @Test
+    void greaterThanOne() {
+        assertThrows(IllegalArgumentException.class, ()-> {
+            new UniformDiscreteProbabilityDistribution<>(
+                    Arrays.asList(0.1, 0.2, 1.3),
+                    Arrays.asList(0.1, 0.2, 1.3)
+            );
+        });
+    }
+
+    @Test
+    void lessThanZero() {
+        assertThrows(IllegalArgumentException.class, ()-> {
+            new UniformDiscreteProbabilityDistribution<>(
+                    Arrays.asList(0.1, 0.2, -0.3, 0.7),
+                    Arrays.asList(0.1, 0.2, -0.3, 0.7)
+            );
+        });
+    }
+
+    @Test
+    void totalLessThanOne() {
+        assertThrows(IllegalArgumentException.class, ()-> {
+            new UniformDiscreteProbabilityDistribution<>(
+                    Arrays.asList(0.1, 0.2, 0.3),
+                    Arrays.asList(0.1, 0.2, 0.3)
+            );
+        });
+    }
+
+    @Test
+    void nextNum() {
     }
 
 }

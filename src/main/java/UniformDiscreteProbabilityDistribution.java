@@ -12,8 +12,15 @@ public class UniformDiscreteProbabilityDistribution<T> {
     UniformDiscreteProbabilityDistribution(List<Double> probabilities, List<T> values) {
         this.probabilities = probabilities;
         this.values = values;
+        checkSizes();
         checkValidProbabilities();
         checkTotalProbability();
+    }
+
+    private void checkSizes() {
+        if (this.values.size() != this.probabilities.size()) {
+            throw new IllegalArgumentException("Lists must be the same size");
+        }
     }
 
     private void checkTotalProbability() {
