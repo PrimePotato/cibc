@@ -53,6 +53,14 @@ class UniformDiscreteProbabilityDistributionTest {
 
     @Test
     void nextNum() {
+        UniformDiscreteProbabilityDistribution<String> udpd = new UniformDiscreteProbabilityDistribution<>(
+                Arrays.asList(0.1, 0.2, 0.3, 0.4),
+                Arrays.asList("A", "B", "C", "D")
+        );
+        String nn = udpd.nextNum();
+        System.out.println(nn);
     }
+
+
 
 }

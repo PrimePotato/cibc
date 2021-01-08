@@ -1,9 +1,11 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 
 public class UniformDiscreteProbabilityDistribution<T> {
     private final List<Double> probabilities;
+    private final double[] cumulativeProbabilities;
     private final List<T> values;
 
     private double tol = 1e-14;
@@ -15,6 +17,27 @@ public class UniformDiscreteProbabilityDistribution<T> {
         checkSizes();
         checkValidProbabilities();
         checkTotalProbability();
+        this.cumulativeProbabilities = cumulativeProbabilities();
+    }
+
+    private double[] cumulativeProbabilities() {
+        double tot = 0.;
+        int n = this.probabilities.size();
+        double[] cp = new double[n];
+        for (int i = 0; i < n; i++) {
+            tot += this.probabilities.get(i);
+            cp[i] = tot;
+        }
+        return cp;
+    }
+
+    private T quantile(double p) {
+        for (int i = 0; i < this.cumulativeProbabilities.length; i++) {
+            if (this.cumulativeProbabilities[i] > p) {
+                return this.values.get(i);
+            }
+        }
+        return null;
     }
 
     private void checkSizes() {
@@ -36,7 +59,7 @@ public class UniformDiscreteProbabilityDistribution<T> {
         });
     }
 
-    public double nextNum() {
-        return random.nextFloat();
+    public T nextNum() {
+        return quantile(random.nextFloat());
     }
 }
