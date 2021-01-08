@@ -64,7 +64,6 @@ class UniformDiscreteProbabilityDistributionTest {
         System.out.println(nn);
     }
 
-
     @Test
     void verifyDistribution() {
         //add some verification
@@ -78,7 +77,7 @@ class UniformDiscreteProbabilityDistributionTest {
             String v = udpd.nextNum();
             counter.put(v, counter.getOrDefault(v, 0) + 1);
         }
-        Map<String, Double> estProbs = counter.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e->(double)e.getValue()/(double)n));
+        Map<String, Double> estProbs = counter.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e -> (double) e.getValue() / (double) n));
         System.out.println(estProbs);
     }
 

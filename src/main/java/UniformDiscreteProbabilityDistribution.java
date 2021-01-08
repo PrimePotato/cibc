@@ -30,13 +30,28 @@ public class UniformDiscreteProbabilityDistribution<T> {
         return cp;
     }
 
-    private T quantile(double p) {
-        for (int i = 0; i < this.cumulativeProbabilities.length; i++) {
-            if (this.cumulativeProbabilities[i] > p) {
-                return this.values.get(i);
+    public static int binarySearchLeft(double value, double[] a) {
+        if (value < a[0]) return 0;
+        if (value > a[a.length - 1]) return a.length - 1;
+
+        int left = 0;
+        int right = a.length - 1;
+
+        while (left <= right) {
+            int mid = (right + left) / 2;
+            if (value < a[mid]) {
+                right = mid - 1;
+            } else if (value > a[mid]) {
+                left = mid + 1;
+            } else {
+                return mid;
             }
         }
-        return null;
+        return left;
+    }
+
+    private T quantileBinarySearch(double p) {
+        return this.values.get(binarySearchLeft(p, this.cumulativeProbabilities));
     }
 
     private void checkSizes() {
@@ -59,6 +74,6 @@ public class UniformDiscreteProbabilityDistribution<T> {
     }
 
     public T nextNum() {
-        return quantile(random.nextFloat());
+        return quantileBinarySearch(random.nextFloat());
     }
 }
