@@ -73,7 +73,7 @@ class UniformDiscreteProbabilityDistributionTest {
                 Arrays.asList("A", "B", "C", "D")
         );
         Map<String, Integer> counter = new HashMap<>();
-        int n = 10000000;
+        int n = 100000000;
         for (int i = 0; i < n; i++) {
             String v = udpd.nextNum();
             counter.put(v, counter.getOrDefault(v, 0) + 1);
