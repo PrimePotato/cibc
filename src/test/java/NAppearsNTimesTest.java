@@ -1,8 +1,6 @@
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,10 +32,10 @@ class NAppearsNTimesTest {
 
     @Test
     void question2() {
-        System.out.println(NAppearsNTimes.partialSumOutput(1000));
-        System.out.println(NAppearsNTimes.partialSumOutput(1000));
-        System.out.println(NAppearsNTimes.partialSumOutput(1000));
-        System.out.println(NAppearsNTimes.partialSumOutput(1000));
+        System.out.println(NAppearsNTimes.questionOutput(1000));
+        System.out.println(NAppearsNTimes.questionOutput(1000));
+        System.out.println(NAppearsNTimes.questionOutput(1000));
+        System.out.println(NAppearsNTimes.questionOutput(1000));
     }
 
 }

@@ -30,7 +30,7 @@ public class UniformDiscreteProbabilityDistribution<T> {
         return cp;
     }
 
-    public static int binarySearchLeft(double value, double[] a) {
+    private static int binarySearchLeft(double value, double[] a) {
         if (value < a[0]) return 0;
         if (value > a[a.length - 1]) return a.length - 1;
 
@@ -50,7 +50,7 @@ public class UniformDiscreteProbabilityDistribution<T> {
         return left;
     }
 
-    private T quantileBinarySearch(double p) {
+    private T quantile(double p) {
         return this.values.get(binarySearchLeft(p, this.cumulativeProbabilities));
     }
 
@@ -74,6 +74,6 @@ public class UniformDiscreteProbabilityDistribution<T> {
     }
 
     public T nextNum() {
-        return quantileBinarySearch(random.nextFloat());
+        return quantile(random.nextFloat());
     }
 }

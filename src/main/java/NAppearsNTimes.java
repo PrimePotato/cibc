@@ -11,7 +11,7 @@ public class NAppearsNTimes {
         return sn / 6;
     }
 
-    public static String partialSumOutput(int n) {
+    public static String questionOutput(int n) {
         return n + " " + partialSum(n);
     }
 }
