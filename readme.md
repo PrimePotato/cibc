@@ -27,10 +27,21 @@ The tests are found in following
 
 The partial sum of this sequence can be solved analytically so is constant in time; O(1).   
 
-<img src="https://render.githubusercontent.com/render/math?math=e^{i %2B\pi} =x%2B1">
+This comes as part of recognising this sum can also be expressed as a sum of sums of sequential numbers. i.e.
+S(n) = sum(1,2,3,...,n) + sum(2,3,4,...,n) ... 
+
+
+This follows from that sum(0,1,2,3,...,n) = n*(n-1)/2. To get the nth sequence we to invert 
+and take integer part of the positive real root.  
+
+Therefore, the nth value the sequence is given by floor(0.5 + sqrt(2*n))
+
+
+ 
 
 
 
 
 
+``
 

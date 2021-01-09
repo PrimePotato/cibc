@@ -9,7 +9,7 @@ class NAppearsNTimesTest {
 
     @Test
     void nthValue() {
-        for (int n : IntStream.range(0, 20).toArray()) {
+        for (int n : IntStream.range(1, 20).toArray()) {
             System.out.println(n + " " + NAppearsNTimes.nthValue(n) + " " + NAppearsNTimes.partialSum(n));
         }
     }
