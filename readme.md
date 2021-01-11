@@ -38,6 +38,9 @@ keys tests
 
 ## Implementation Details
 
+### Data type Choices
+
+### Background
 The partial sum of this sequence can be solved analytically so is constant in time; O(1).   
 
 This comes as part of recognising this sum can also be expressed as a sum of sums of sequential numbers. i.e.
