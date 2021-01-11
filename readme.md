@@ -8,14 +8,20 @@ The source code for this question is found in class UniformDiscreteProbabilityDi
 
 The tests are found in
 
+
+
 ## Implementation Details
 
 This searches over the cumulative probabilities using modified search algorithm that has a time complexity of O(
 log(n)). This can either be set to use a bisection or secant method. 
 
-Within the search function used arrays and primitives to reduce memory overhead and increase speed 
+Within the search function used arrays and primitives to reduce memory overhead and increase speed
 
-##
+## Thoughts
+Bisect more robust
+Secant faster in certain situations is less robust.
+
+## 
 
 # Question 2
 

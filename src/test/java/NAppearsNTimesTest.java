@@ -9,17 +9,17 @@ class NAppearsNTimesTest {
 
     @Test
     void nthValue() {
-        for (int n : IntStream.range(1, 20).toArray()) {
-            System.out.println(n + " " + NAppearsNTimes.nthValue(n) + " " + NAppearsNTimes.partialSum(n));
-        }
-    }
-
-    @Test
-    void nthValueTestCase() {
         int[] nValues = {1, 2, 3, 4, 5, 6, 10, 100, 1000};
         int[] expected = {1, 2, 2, 3, 3, 3, 4, 14, 45};
         int[] actual = Arrays.stream(nValues).map(NAppearsNTimes::nthValue).toArray();
         assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void visualInspection() {
+        for (int n : IntStream.range(1, 20).toArray()) {
+            System.out.println(n + " " + NAppearsNTimes.nthValue(n) + " " + NAppearsNTimes.partialSum(n));
+        }
     }
 
     @Test

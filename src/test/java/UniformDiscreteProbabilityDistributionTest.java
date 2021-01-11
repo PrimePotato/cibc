@@ -7,13 +7,9 @@ import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 
 import static java.lang.Math.abs;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class UniformDiscreteProbabilityDistributionTest {
-
-    @BeforeEach
-    void setUp() {
-    }
 
     @Test
     void sizeMismatch() {
@@ -62,6 +58,7 @@ class UniformDiscreteProbabilityDistributionTest {
                 Arrays.asList("A", "B", "C", "D")
         );
         String nn = udpd.nextNum();
+        assertNotNull(nn);
         System.out.println(nn);
     }
 
@@ -71,23 +68,21 @@ class UniformDiscreteProbabilityDistributionTest {
                 Arrays.asList(0.1, 0.2, 0.3, 0.4),
                 Arrays.asList("A", "B", "C", "D")
         );
-        System.out.println(udpd.quantile(0.2, Estimator.SECANT));
-        System.out.println(udpd.quantile(0.38, Estimator.SECANT));
-        System.out.println(udpd.quantile(0.1, Estimator.SECANT));
-        System.out.println(udpd.quantile(0.08, Estimator.SECANT));
-        System.out.println(udpd.quantile(0.4, Estimator.SECANT));
+        assertEquals("B", udpd.quantile(0.2, Estimator.BISECT));
+        assertEquals("C", udpd.quantile(0.38, Estimator.BISECT));
+        assertEquals("A", udpd.quantile(0.1, Estimator.BISECT));
+        assertEquals("A", udpd.quantile(0.08, Estimator.BISECT));
+        assertEquals("C", udpd.quantile(0.5, Estimator.BISECT));
+        assertEquals("D", udpd.quantile(0.8, Estimator.BISECT));
     }
 
-    @Test
-    void verifyDistribution() {
-
+    private void verifyDistribution(int n, Estimator estimator){
         Map<String, Double> mp = Map.of("A", 0.1, "B", 0.2, "C", 0.3, "D", 0.4);
         UniformDiscreteProbabilityDistribution<String> udpd = new UniformDiscreteProbabilityDistribution<>(mp);
 
         Map<String, Integer> counter = new HashMap<>();
-        int n = 10000;
-        for (int i = 0; i < n; i++) {
-            String v = udpd.nextNum();
+        for (int i = 0; i < n; ++i) {
+            String v = udpd.nextNum(estimator);
             counter.put(v, counter.getOrDefault(v, 0) + 1);
         }
         Map<String, Double> estProbs = counter.entrySet().stream().collect(
@@ -96,10 +91,16 @@ class UniformDiscreteProbabilityDistributionTest {
         for (Map.Entry<String, Double> e : mp.entrySet()) {
             double diff = abs(estProbs.get(e.getKey()) - e.getValue());
             double se = UniformDiscreteProbabilityDistribution.sampleError(e.getValue(), n);
-            assert diff < se * 5.0;
+            assertTrue(diff < se * 5.0);
         }
 
         System.out.println(estProbs);
+    }
+
+    @Test
+    void verifyDistributions() {
+        verifyDistribution(10000000, Estimator.BISECT);
+        verifyDistribution(10000000, Estimator.SECANT);
     }
 
     private void speedTestUniform(int size, int n, Estimator estimator) {
