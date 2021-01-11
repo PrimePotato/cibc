@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.stream.LongStream;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class NAppearsNTimesTest {
 
@@ -38,6 +39,14 @@ class NAppearsNTimesTest {
         assertArrayEquals(expected, actual);
     }
 
+    @Test
+    void max() {
+        long m = NAppearsNTimes.findMaxValue();
+        assertEquals(m, NAppearsNTimes.MAX_VALUE);
+        System.out.println(m);
+        System.out.println(NAppearsNTimes.partialSum(m));
+    }
+
     private static void verifySampleTestDate(Path path) {
         try {
             List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
@@ -45,12 +54,12 @@ class NAppearsNTimesTest {
                 if (line.length() == 0) continue;
                 if (line.charAt(0) == '0') break;
                 String[] s = line.split(" ");
-                assert Integer.parseInt(s[3]) == NAppearsNTimes.partialSum(Integer.parseInt(s[0]));
+                assert Long.parseLong(s[3]) == NAppearsNTimes.partialSum(Long.parseLong(s[0]));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-    } 
+    }
 
     @Test
     void sampleInputFile() {
@@ -62,5 +71,6 @@ class NAppearsNTimesTest {
             e.printStackTrace();
         }
     }
+
 
 }
