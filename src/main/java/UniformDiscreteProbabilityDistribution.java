@@ -1,6 +1,6 @@
 import java.util.*;
 
-
+@SuppressWarnings("unchecked")
 public class UniformDiscreteProbabilityDistribution<T> {
     private final double[] probabilities;
     private final double[] cumulativeProbabilities;

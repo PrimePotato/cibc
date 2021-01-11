@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="UniformDiscreteProbabilityDistributionTest" time="3.633" tests="6" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="UniformDiscreteProbabilityDistributionTest" time="7.05" tests="8" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -17,7 +17,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="GB"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-11.0.9\bin"/>
-    <property name="sun.java.command" value="C:\Users\naked\AppData\Local\Temp\surefire802503836731187269\surefirebooter153045957944363313.jar C:\Users\naked\AppData\Local\Temp\surefire802503836731187269 2021-01-08T17-35-21_244-jvmRun1 surefire4818911305501487210tmp surefire_012033477007985361707tmp"/>
+    <property name="sun.java.command" value="C:\Users\naked\AppData\Local\Temp\surefire607578314505147561\surefirebooter10968514699767920551.jar C:\Users\naked\AppData\Local\Temp\surefire607578314505147561 2021-01-11T20-14-20_517-jvmRun1 surefire12951040671527010380tmp surefire_013779418471069681421tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\naked\IdeaProjects\CIBC\target\test-classes;C:\Users\naked\IdeaProjects\CIBC\target\classes;C:\Users\naked\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.4.2\junit-jupiter-api-5.4.2.jar;C:\Users\naked\.m2\repository\org\apiguardian\apiguardian-api\1.0.0\apiguardian-api-1.0.0.jar;C:\Users\naked\.m2\repository\org\opentest4j\opentest4j\1.1.1\opentest4j-1.1.1.jar;C:\Users\naked\.m2\repository\org\junit\platform\junit-platform-commons\1.4.2\junit-platform-commons-1.4.2.jar;C:\Users\naked\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.4.2\junit-jupiter-engine-5.4.2.jar;C:\Users\naked\.m2\repository\org\junit\platform\junit-platform-engine\1.4.2\junit-platform-engine-1.4.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -33,7 +33,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\naked\AppData\Local\Temp\surefire802503836731187269\surefirebooter153045957944363313.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\naked\AppData\Local\Temp\surefire607578314505147561\surefirebooter10968514699767920551.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="11.0.9+7-LTS"/>
@@ -61,10 +61,12 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="55.0"/>
   </properties>
-  <testcase name="lessThanZero" classname="UniformDiscreteProbabilityDistributionTest" time="0"/>
+  <testcase name="lessThanZero" classname="UniformDiscreteProbabilityDistributionTest" time="0.009"/>
+  <testcase name="quantile" classname="UniformDiscreteProbabilityDistributionTest" time="0.003"/>
+  <testcase name="speedComparison" classname="UniformDiscreteProbabilityDistributionTest" time="6.055"/>
   <testcase name="greaterThanOne" classname="UniformDiscreteProbabilityDistributionTest" time="0.001"/>
   <testcase name="totalLessThanOne" classname="UniformDiscreteProbabilityDistributionTest" time="0.002"/>
-  <testcase name="verifyDistribution" classname="UniformDiscreteProbabilityDistributionTest" time="3.626"/>
+  <testcase name="verifyDistributions" classname="UniformDiscreteProbabilityDistributionTest" time="0.972"/>
   <testcase name="sizeMismatch" classname="UniformDiscreteProbabilityDistributionTest" time="0.001"/>
-  <testcase name="nextNum" classname="UniformDiscreteProbabilityDistributionTest" time="0"/>
+  <testcase name="nextNum" classname="UniformDiscreteProbabilityDistributionTest" time="0.001"/>
 </testsuite>
