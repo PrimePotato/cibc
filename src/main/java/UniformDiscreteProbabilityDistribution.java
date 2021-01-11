@@ -1,5 +1,4 @@
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 
 public class UniformDiscreteProbabilityDistribution<T> {
@@ -19,6 +18,16 @@ public class UniformDiscreteProbabilityDistribution<T> {
         this.cumulativeProbabilities = cumulativeProbabilities();
     }
 
+    UniformDiscreteProbabilityDistribution(Map<T, Double> mapProbabilities) {
+        this.probabilities = new ArrayList<>(mapProbabilities.values());
+        this.values = new ArrayList<>(mapProbabilities.keySet());
+        checkSizes();
+        checkValidProbabilities();
+        checkTotalProbability();
+        this.cumulativeProbabilities = cumulativeProbabilities();
+    }
+
+
     private double[] cumulativeProbabilities() {
         double tot = 0.;
         int n = this.probabilities.size();
@@ -30,8 +39,8 @@ public class UniformDiscreteProbabilityDistribution<T> {
         return cp;
     }
 
-    public static double sampleError(int p, int n) {
-        return Math.sqrt((p * (1 - p)) / (double) n);
+    public static double sampleError(double p, double n) {
+        return Math.sqrt((p * (1 - p)) / n);
     }
 
     public int searchLeft(double value, double[] a, Estimator estimator) {

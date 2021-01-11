@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static java.lang.Math.abs;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class UniformDiscreteProbabilityDistributionTest {
@@ -79,18 +80,24 @@ class UniformDiscreteProbabilityDistributionTest {
 
     @Test
     void verifyDistribution() {
-        //add some verification
-        UniformDiscreteProbabilityDistribution<String> udpd = new UniformDiscreteProbabilityDistribution<>(
-                Arrays.asList(0.1, 0.2, 0.3, 0.4),
-                Arrays.asList("A", "B", "C", "D")
-        );
+
+        Map<String, Double> mp = Map.of("A", 0.1, "B", 0.2, "C", 0.3, "D", 0.4);
+        UniformDiscreteProbabilityDistribution<String> udpd = new UniformDiscreteProbabilityDistribution<>(mp);
+
         Map<String, Integer> counter = new HashMap<>();
-        int n = 100000000;
+        int n = 10000;
         for (int i = 0; i < n; i++) {
             String v = udpd.nextNum();
             counter.put(v, counter.getOrDefault(v, 0) + 1);
         }
         Map<String, Double> estProbs = counter.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e -> (double) e.getValue() / (double) n));
+
+        for (Map.Entry<String, Double> e : mp.entrySet()){
+            double diff = abs(estProbs.get(e.getKey()) - e.getValue());
+            double se = UniformDiscreteProbabilityDistribution.sampleError(e.getValue(), n);
+            assert diff < se * 5.0;
+        }
+
         System.out.println(estProbs);
     }
 
