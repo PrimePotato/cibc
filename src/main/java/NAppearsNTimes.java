@@ -10,7 +10,7 @@ public class NAppearsNTimes {
         return ((6 * n + 1) * a - a * a * a) / 6;
     }
 
-    public static String questionOutput(int n) {
-        return n + " " + partialSum(n);
+    public static String questionOutput(String n) {
+        return Integer.parseInt(n) + " " + partialSum(Integer.parseInt(n));
     }
 }

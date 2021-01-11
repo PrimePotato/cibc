@@ -1,4 +1,3 @@
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -9,12 +8,12 @@ import java.util.stream.IntStream;
 import static java.lang.Math.abs;
 import static org.junit.jupiter.api.Assertions.*;
 
-class UniformDiscreteProbabilityDistributionTest {
+class DiscreteProbabilityDistributionTest {
 
     @Test
     void sizeMismatch() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new UniformDiscreteProbabilityDistribution<>(
+            new DiscreteProbabilityDistribution<>(
                     Arrays.asList(0.1, 0.2, 0.7),
                     Arrays.asList(0.1, 0.2, 0.3, 0.4)
             );
@@ -24,7 +23,7 @@ class UniformDiscreteProbabilityDistributionTest {
     @Test
     void greaterThanOne() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new UniformDiscreteProbabilityDistribution<>(
+            new DiscreteProbabilityDistribution<>(
                     Arrays.asList(0.1, 0.2, 1.3),
                     Arrays.asList(0.1, 0.2, 1.3)
             );
@@ -34,7 +33,7 @@ class UniformDiscreteProbabilityDistributionTest {
     @Test
     void lessThanZero() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new UniformDiscreteProbabilityDistribution<>(
+            new DiscreteProbabilityDistribution<>(
                     Arrays.asList(0.1, 0.2, -0.3, 0.7),
                     Arrays.asList(0.1, 0.2, -0.3, 0.7)
             );
@@ -44,7 +43,7 @@ class UniformDiscreteProbabilityDistributionTest {
     @Test
     void totalLessThanOne() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new UniformDiscreteProbabilityDistribution<>(
+            new DiscreteProbabilityDistribution<>(
                     Arrays.asList(0.1, 0.2, 0.3),
                     Arrays.asList(0.1, 0.2, 0.3)
             );
@@ -53,7 +52,7 @@ class UniformDiscreteProbabilityDistributionTest {
 
     @Test
     void nextNum() {
-        UniformDiscreteProbabilityDistribution<String> udpd = new UniformDiscreteProbabilityDistribution<>(
+        DiscreteProbabilityDistribution<String> udpd = new DiscreteProbabilityDistribution<>(
                 Arrays.asList(0.1, 0.2, 0.3, 0.4),
                 Arrays.asList("A", "B", "C", "D")
         );
@@ -64,7 +63,7 @@ class UniformDiscreteProbabilityDistributionTest {
 
     @Test
     void quantile() {
-        UniformDiscreteProbabilityDistribution<String> udpd = new UniformDiscreteProbabilityDistribution<>(
+        DiscreteProbabilityDistribution<String> udpd = new DiscreteProbabilityDistribution<>(
                 Arrays.asList(0.1, 0.2, 0.3, 0.4),
                 Arrays.asList("A", "B", "C", "D")
         );
@@ -78,7 +77,7 @@ class UniformDiscreteProbabilityDistributionTest {
 
     private void verifyDistribution(int n, Estimator estimator){
         Map<String, Double> mp = Map.of("A", 0.1, "B", 0.2, "C", 0.3, "D", 0.4);
-        UniformDiscreteProbabilityDistribution<String> udpd = new UniformDiscreteProbabilityDistribution<>(mp);
+        DiscreteProbabilityDistribution<String> udpd = new DiscreteProbabilityDistribution<>(mp);
 
         Map<String, Integer> counter = new HashMap<>();
         for (int i = 0; i < n; ++i) {
@@ -90,7 +89,7 @@ class UniformDiscreteProbabilityDistributionTest {
 
         for (Map.Entry<String, Double> e : mp.entrySet()) {
             double diff = abs(estProbs.get(e.getKey()) - e.getValue());
-            double se = UniformDiscreteProbabilityDistribution.sampleError(e.getValue(), n);
+            double se = DiscreteProbabilityDistribution.sampleError(e.getValue(), n);
             assertTrue(diff < se * 5.0);
         }
 
@@ -106,7 +105,7 @@ class UniformDiscreteProbabilityDistributionTest {
     private void speedTestUniform(int size, int n, Estimator estimator) {
         double[] ps = DoubleStream.generate(() -> 1. / size).limit(size).toArray();
         Integer[] vs = IntStream.range(0, size).boxed().toArray(Integer[]::new);
-        UniformDiscreteProbabilityDistribution<Integer> udpd = new UniformDiscreteProbabilityDistribution<>(ps, vs);
+        DiscreteProbabilityDistribution<Integer> udpd = new DiscreteProbabilityDistribution<>(ps, vs);
         long before = System.currentTimeMillis();
         IntStream.range(0, n).forEach(i -> udpd.nextNum(estimator));
         long after = System.currentTimeMillis();
@@ -119,7 +118,7 @@ class UniformDiscreteProbabilityDistributionTest {
         double total = Arrays.stream(ps).sum();
         ps = Arrays.stream(ps).map(d -> d / total).toArray();
         Integer[] vs = IntStream.range(0, size).boxed().toArray(Integer[]::new);
-        UniformDiscreteProbabilityDistribution<Integer> udpd = new UniformDiscreteProbabilityDistribution<>(ps, vs);
+        DiscreteProbabilityDistribution<Integer> udpd = new DiscreteProbabilityDistribution<>(ps, vs);
         long before = System.currentTimeMillis();
         IntStream.range(0, n).forEach(i -> udpd.nextNum(estimator));
         long after = System.currentTimeMillis();

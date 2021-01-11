@@ -2,7 +2,7 @@
 
 ## Source Code
 
-The source code for this question is found in class UniformDiscreteProbabilityDistribution.
+The source code for this question is found in class DiscreteProbabilityDistribution.
 
 ## Tests
 

@@ -1,7 +1,7 @@
 import java.util.*;
 
 @SuppressWarnings("unchecked")
-public class UniformDiscreteProbabilityDistribution<T> {
+public class DiscreteProbabilityDistribution<T> {
     private final double[] probabilities;
     private final double[] cumulativeProbabilities;
     private final T[] labels;
@@ -9,7 +9,7 @@ public class UniformDiscreteProbabilityDistribution<T> {
     private final double tol = 1e-16;
     private Random random = new Random();
 
-    UniformDiscreteProbabilityDistribution(double[] probabilities, T[] labels) {
+    DiscreteProbabilityDistribution(double[] probabilities, T[] labels) {
         this.probabilities = probabilities;
         this.labels = labels;
         checkSizes();
@@ -19,14 +19,14 @@ public class UniformDiscreteProbabilityDistribution<T> {
         this.cumulativeProbabilities = cumulativeProbabilities();
     }
 
-    UniformDiscreteProbabilityDistribution(List<Double> probabilities, List<T> labels) {
+    DiscreteProbabilityDistribution(List<Double> probabilities, List<T> labels) {
         this(
                 probabilities.stream().mapToDouble(Double::doubleValue).toArray(),
                 (T[]) labels.toArray()
         );
     }
 
-    UniformDiscreteProbabilityDistribution(Map<T, Double> mapProbabilities) {
+    DiscreteProbabilityDistribution(Map<T, Double> mapProbabilities) {
         this(
                 mapProbabilities.values().stream().mapToDouble(Double::doubleValue).toArray(),
                 (T[]) mapProbabilities.keySet().toArray()
