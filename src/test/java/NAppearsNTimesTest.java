@@ -1,18 +1,13 @@
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class NAppearsNTimesTest {
 
@@ -31,14 +26,6 @@ class NAppearsNTimesTest {
         }
     }
 
-//    @Test
-//    void question2() {
-//        System.out.println(NAppearsNTimes.questionOutput(1000));
-//        System.out.println(NAppearsNTimes.questionOutput(1000));
-//        System.out.println(NAppearsNTimes.questionOutput(1000));
-//        System.out.println(NAppearsNTimes.questionOutput(1000));
-//    }
-
     @Test
     void partialSum() {
         int[] nValues = {10, 6, 7, 11, 15, 16, 100, 10000, 1000, 21, 22};
@@ -48,22 +35,12 @@ class NAppearsNTimesTest {
     }
 
     @Test
-    void questionOutput() {
-    }
-
-    @Test
-    void questionOutputFile() {
+    void sampleInputFile() {
+        URL url = this.getClass().getResource("sampleInput.txt");
         try {
-            URL url = this.getClass().getResource("sampleInput.txt");
             Path path = Paths.get(url.toURI());
-            List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
-            for (String line : lines) {
-                if (line.length() == 0) continue;
-                if (line == "0") break;
-                String[] s = line.split(" ");
-                assertEquals(Integer.parseInt(s[3]), NAppearsNTimes.partialSum(Integer.parseInt(s[0])));
-            }
-        } catch (IOException | URISyntaxException e) {
+            NAppearsNTimes.verifySampleTestDate(path);
+        } catch (URISyntaxException e) {
             e.printStackTrace();
         }
     }
