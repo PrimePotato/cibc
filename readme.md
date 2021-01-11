@@ -10,8 +10,12 @@ The tests are found in
 
 ## Implementation Details
 
-This searches over the cumulative probabilities using modified binary search algorithm that has a time complexity of O(
-log(n)).
+This searches over the cumulative probabilities using modified search algorithm that has a time complexity of O(
+log(n)). This can either be set to use a bisection or secant method. 
+
+Within the search function used arrays and primitives to reduce memory overhead and increase speed 
+
+##
 
 # Question 2
 
@@ -22,6 +26,9 @@ The source code for this question is found in class NAppearsNTimes.
 ## Tests
 
 The tests are found in following
+
+keys tests
+
 
 ## Implementation Details
 
