@@ -65,6 +65,19 @@ class UniformDiscreteProbabilityDistributionTest {
     }
 
     @Test
+    void quantile() {
+        UniformDiscreteProbabilityDistribution<String> udpd = new UniformDiscreteProbabilityDistribution<>(
+                Arrays.asList(0.1, 0.2, 0.3, 0.4),
+                Arrays.asList("A", "B", "C", "D")
+        );
+        System.out.println(udpd.quantile(0.2));
+        System.out.println(udpd.quantile(0.38));
+        System.out.println(udpd.quantile(0.1));
+        System.out.println(udpd.quantile(0.08));
+        System.out.println(udpd.quantile(0.4));
+    }
+
+    @Test
     void verifyDistribution() {
         //add some verification
         UniformDiscreteProbabilityDistribution<String> udpd = new UniformDiscreteProbabilityDistribution<>(
@@ -79,6 +92,12 @@ class UniformDiscreteProbabilityDistributionTest {
         }
         Map<String, Double> estProbs = counter.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e -> (double) e.getValue() / (double) n));
         System.out.println(estProbs);
+    }
+
+    @Test
+    void TimimgsForLargeDist(){
+        // small a
+        // large a
     }
 
 

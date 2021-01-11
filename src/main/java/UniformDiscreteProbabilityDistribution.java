@@ -30,7 +30,11 @@ public class UniformDiscreteProbabilityDistribution<T> {
         return cp;
     }
 
-    private static int binarySearchLeft(double value, double[] a) {
+    public static double sampleError(int p, int n) {
+        return Math.sqrt((p * (1 - p)) / (double) n);
+    }
+
+    public int searchLeft(double value, double[] a, Estimator estimator) {
         if (value < a[0]) return 0;
         if (value > a[a.length - 1]) return a.length - 1;
 
@@ -38,7 +42,9 @@ public class UniformDiscreteProbabilityDistribution<T> {
         int right = a.length - 1;
 
         while (left <= right) {
-            int mid = (right + left) / 2;
+            int mid = estimator.guess(value, left, right, a);
+            mid = Math.max(mid, left);
+            mid = Math.min(mid, right);
             if (value < a[mid]) {
                 right = mid - 1;
             } else if (value > a[mid]) {
@@ -50,8 +56,8 @@ public class UniformDiscreteProbabilityDistribution<T> {
         return left;
     }
 
-    private T quantile(double p) {
-        return this.values.get(binarySearchLeft(p, this.cumulativeProbabilities));
+    public T quantile(double p) {
+        return this.values.get(searchLeft(p, this.cumulativeProbabilities, Estimator.BISECT));
     }
 
     private void checkSizes() {
