@@ -14,11 +14,13 @@ The source code for this question is found in classes DiscreteProbabilityDistrib
 ### Tests
 The tests are found in DiscreteProbabilityDistributionTest and EstimatorTest
 
-#### verifyDistribution
+#### Key tests
+ 
+##### verifyDistribution
 This verifies each estimate of the individual probabilities and ensures it is within 5 standard errors of the expected. 
 It should be noted there is an extremely low chance the job will fail but nonetheless it is technically possible.  
 
-#### speedComparison
+##### speedComparison
 This compares the speed on the two methods I implemented, namely bisect and secant.   
 
 ### Implementation Details
@@ -48,10 +50,13 @@ The source code for this question is found in class NAppearsNTimes.
 ### Tests
 The tests are found in NAppearsNTimesTest.
 
-#### sampleInputFile
+
+#### Key tests
+
+##### sampleInputFile
 This take a sample test from a file in the text format specified in the question.  
 
-#### maxMalue
+##### maxMalue
 This determines the max value the partial sum calculation can be before overflwoing.  
 
 ### Implementation Details
