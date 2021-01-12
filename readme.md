@@ -5,6 +5,11 @@
 mvn clean install
 ```
 
+## Dependencies
+* Java 11
+* JUNIT 5+
+* Maven 3+
+
 ## Question 1
 
 ### Source Code
@@ -45,11 +50,10 @@ there are large number of possible outcomes. The Secant method starts to perform
 ## Question 2
 
 ### Source Code
-The source code for this question is found in class NAppearsNTimes.
+The source code for this question is found in class NAppearsNTimes. 
 
 ### Tests
-The tests are found in NAppearsNTimesTest.
-
+The tests are found in NAppearsNTimesTest. Many are just unit tests but these are the key tests regarding 
 
 #### Key tests
 
