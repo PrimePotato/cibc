@@ -40,7 +40,7 @@ class NAppearsNTimesTest {
     }
 
     @Test
-    void max() {
+    void maxValue() {
         long m = NAppearsNTimes.findMaxValue();
         assertEquals(m, NAppearsNTimes.MAX_VALUE);
         System.out.println(m);

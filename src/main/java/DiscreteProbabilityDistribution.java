@@ -33,22 +33,21 @@ public class DiscreteProbabilityDistribution<T> {
         );
     }
 
-    private double[] cumulativeProbabilities() {
-        double tot = 0.;
-        int n = this.probabilities.length;
-        double[] cp = new double[n];
-        for (int i = 0; i < n; i++) {
-            tot += this.probabilities[i];
-            cp[i] = tot;
-        }
-        return cp;
+
+    public T nextNum(Estimator estimator) {
+        return quantile(random.nextFloat(), estimator);
     }
+
+    public T nextNum() {
+        return quantile(random.nextFloat(), Estimator.SECANT);
+    }
+
 
     public static double sampleError(double p, double n) {
         return Math.sqrt((p * (1 - p)) / n);
     }
 
-    public int searchLeft(double value, double[] a, Estimator estimator) {
+    public static int searchLeft(double value, double[] a, Estimator estimator) {
         if (value < a[0]) return 0;
         if (value > a[a.length - 1]) return a.length - 1;
 
@@ -71,6 +70,18 @@ public class DiscreteProbabilityDistribution<T> {
     public T quantile(double p, Estimator estimator) {
         return this.labels[searchLeft(p, this.cumulativeProbabilities, estimator)];
     }
+
+    private double[] cumulativeProbabilities() {
+        double tot = 0.;
+        int n = this.probabilities.length;
+        double[] cp = new double[n];
+        for (int i = 0; i < n; i++) {
+            tot += this.probabilities[i];
+            cp[i] = tot;
+        }
+        return cp;
+    }
+
 
     private void checkSizes() {
         if (this.labels.length != this.probabilities.length) {
@@ -99,12 +110,5 @@ public class DiscreteProbabilityDistribution<T> {
         });
     }
 
-    public T nextNum(Estimator estimator) {
-        return quantile(random.nextFloat(), estimator);
-    }
-
-    public T nextNum() {
-        return quantile(random.nextFloat(), Estimator.SECANT);
-    }
 
 }

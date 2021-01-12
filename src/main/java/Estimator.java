@@ -12,7 +12,7 @@ public enum Estimator {
     BISECT {
         @Override
         public int guess(double value, int leftIdx, int rightIdx, double[] a) {
-            return (leftIdx + rightIdx) / 2;
+            return leftIdx / 2 + rightIdx / 2;
         }
     };
 

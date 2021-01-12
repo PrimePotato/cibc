@@ -75,6 +75,40 @@ class DiscreteProbabilityDistributionTest {
         assertEquals("D", udpd.quantile(0.8, Estimator.BISECT));
     }
 
+    @Test
+    void verifyDistributions() {
+        verifyDistribution(10000000, Estimator.BISECT);
+        verifyDistribution(10000000, Estimator.SECANT);
+    }
+
+    @Test
+    void speedComparison() {
+
+        speedTestUniform(10, 10000000, Estimator.BISECT);
+        speedTestUniform(10, 10000000, Estimator.SECANT);
+
+        speedTestUniform(100000, 10000000, Estimator.BISECT);
+        speedTestUniform(100000, 10000000, Estimator.SECANT);
+
+        speedTestRandom(10, 10000000, Estimator.BISECT);
+        speedTestRandom(10, 10000000, Estimator.SECANT);
+
+        speedTestRandom(100000, 10000000, Estimator.BISECT);
+        speedTestRandom(100000, 10000000, Estimator.SECANT);
+    }
+
+    @Test
+    void sampleError() {
+        assertEquals(DiscreteProbabilityDistribution.sampleError(0.5, 10), Math.sqrt(0.025), 1e-16);
+    }
+
+    @Test
+    void searchLeft() {
+        double[] ps = createIncreasingArray(1000);
+        assertEquals(249, DiscreteProbabilityDistribution.searchLeft(0.25, ps, Estimator.BISECT));
+        assertEquals(749, DiscreteProbabilityDistribution.searchLeft(0.75, ps, Estimator.BISECT));
+    }
+
     private void verifyDistribution(int n, Estimator estimator){
         Map<String, Double> mp = Map.of("A", 0.1, "B", 0.2, "C", 0.3, "D", 0.4);
         DiscreteProbabilityDistribution<String> udpd = new DiscreteProbabilityDistribution<>(mp);
@@ -96,12 +130,6 @@ class DiscreteProbabilityDistributionTest {
         System.out.println(estProbs);
     }
 
-    @Test
-    void verifyDistributions() {
-        verifyDistribution(10000000, Estimator.BISECT);
-        verifyDistribution(10000000, Estimator.SECANT);
-    }
-
     private void speedTestUniform(int size, int n, Estimator estimator) {
         double[] ps = DoubleStream.generate(() -> 1. / size).limit(size).toArray();
         Integer[] vs = IntStream.range(0, size).boxed().toArray(Integer[]::new);
@@ -111,6 +139,7 @@ class DiscreteProbabilityDistributionTest {
         long after = System.currentTimeMillis();
         System.out.println("Dist: Uniform Results: Time(ms): " + (after - before) + " Method: " + estimator + " n: " + n + " size:" + size);
     }
+
 
     private void speedTestRandom(int size, int n, Estimator estimator) {
         Random rnd = new Random();
@@ -125,31 +154,15 @@ class DiscreteProbabilityDistributionTest {
         System.out.println("Dist: Random Results: Time(ms): " + (after - before) + " Method: " + estimator + " n: " + n + " size:" + size);
     }
 
-    @Test
-    void speedComparison() {
-
-        speedTestUniform(10, 10000000, Estimator.BISECT);
-        speedTestUniform(10, 10000000, Estimator.SECANT);
-
-        speedTestUniform(100000, 10000000, Estimator.BISECT);
-        speedTestUniform(100000, 10000000, Estimator.SECANT);
-
-        speedTestRandom(10, 10000000, Estimator.BISECT);
-        speedTestRandom(10, 10000000, Estimator.SECANT);
-
-        speedTestRandom(100000, 10000000, Estimator.BISECT);
-        speedTestRandom(100000, 10000000, Estimator.SECANT);
+    private double[] createIncreasingArray(int size){
+        double[] ary = DoubleStream.generate(() -> 1. / size).limit(size).toArray();
+        double sum = 0;
+        double[] cs = new double[size];
+        for (int i = 0; i < size; ++i) {
+            sum += ary[i];
+            cs[i] = sum;
+        }
+        return cs;
     }
 
-    @Test
-    void sampleError() {
-    }
-
-    @Test
-    void searchLeft() {
-    }
-
-    @Test
-    void testQuantile() {
-    }
 }
