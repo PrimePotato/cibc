@@ -47,6 +47,18 @@ class NAppearsNTimesTest {
         System.out.println(NAppearsNTimes.partialSum(m));
     }
 
+    @Test
+    void sampleInputFile() {
+        URL url = this.getClass().getResource("sampleInput.txt");
+        try {
+            Path path = Paths.get(url.toURI());
+            verifySampleTestData(path);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     private static void verifySampleTestData(Path path) {
         try {
             List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
@@ -57,17 +69,6 @@ class NAppearsNTimesTest {
                 assert Long.parseLong(s[3]) == NAppearsNTimes.partialSum(Long.parseLong(s[0]));
             }
         } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    void sampleInputFile() {
-        URL url = this.getClass().getResource("sampleInput.txt");
-        try {
-            Path path = Paths.get(url.toURI());
-            verifySampleTestData(path);
-        } catch (URISyntaxException e) {
             e.printStackTrace();
         }
     }
