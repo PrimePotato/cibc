@@ -140,4 +140,16 @@ class DiscreteProbabilityDistributionTest {
         speedTestRandom(100000, 10000000, Estimator.BISECT);
         speedTestRandom(100000, 10000000, Estimator.SECANT);
     }
+
+    @Test
+    void sampleError() {
+    }
+
+    @Test
+    void searchLeft() {
+    }
+
+    @Test
+    void testQuantile() {
+    }
 }

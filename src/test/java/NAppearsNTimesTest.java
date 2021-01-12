@@ -47,7 +47,7 @@ class NAppearsNTimesTest {
         System.out.println(NAppearsNTimes.partialSum(m));
     }
 
-    private static void verifySampleTestDate(Path path) {
+    private static void verifySampleTestData(Path path) {
         try {
             List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
             for (String line : lines) {
@@ -66,7 +66,7 @@ class NAppearsNTimesTest {
         URL url = this.getClass().getResource("sampleInput.txt");
         try {
             Path path = Paths.get(url.toURI());
-            verifySampleTestDate(path);
+            verifySampleTestData(path);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }

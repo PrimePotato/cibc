@@ -2,13 +2,15 @@
 
 ## Source Code
 
-The source code for this question is found in class DiscreteProbabilityDistribution.
+The source code for this question is found in classes DiscreteProbabilityDistribution and Estimator. 
 
 ## Tests
 
 The tests are found in
 
+#### verifyDistribution
 
+#### speedComparison
 
 ## Implementation Details
 
@@ -17,23 +19,18 @@ log(n)). This can either be set to use a bisection or secant method.
 
 Within the search function used arrays and primitives to reduce memory overhead and increase speed
 
-## Thoughts
-Bisect more robust
-Secant faster in certain situations is less robust.
+## Conclusion
+Bisect more robust but Secant is faster for large array sizes.
 
-## 
 
 # Question 2
 
 ## Source Code
-
 The source code for this question is found in class NAppearsNTimes.
 
 ## Tests
+The tests are found in following NAppearsNTimesTest.
 
-The tests are found in following
-
-keys tests
 
 
 ## Implementation Details

@@ -14,7 +14,7 @@ public class NAppearsNTimes {
         return uncheckedPartialSum(n);
     }
 
-    public static long uncheckedPartialSum(long n) {
+    private static long uncheckedPartialSum(long n) {
         long a = nthValue(n);
         return ((6 * n + 1) * a - a * a * a) / 6;
     }
