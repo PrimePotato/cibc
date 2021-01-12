@@ -6,8 +6,8 @@ public class DiscreteProbabilityDistribution<T> {
     private final double[] cumulativeProbabilities;
     private final T[] labels;
 
-    private final double tol = 1e-16;
-    private Random random = new Random();
+    private final double TOL = 1e-16;
+    private final Random random = new Random();
 
     DiscreteProbabilityDistribution(double[] probabilities, T[] labels) {
         this.probabilities = probabilities;
@@ -33,7 +33,6 @@ public class DiscreteProbabilityDistribution<T> {
         );
     }
 
-
     public T nextNum(Estimator estimator) {
         return quantile(random.nextFloat(), estimator);
     }
@@ -42,12 +41,15 @@ public class DiscreteProbabilityDistribution<T> {
         return quantile(random.nextFloat(), Estimator.SECANT);
     }
 
-
     public static double sampleError(double p, double n) {
         return Math.sqrt((p * (1 - p)) / n);
     }
 
-    public static int searchLeft(double value, double[] a, Estimator estimator) {
+    protected T quantile(double p, Estimator estimator) {
+        return this.labels[searchLeft(p, this.cumulativeProbabilities, estimator)];
+    }
+
+    protected static int searchLeft(double value, double[] a, Estimator estimator) {
         if (value < a[0]) return 0;
         if (value > a[a.length - 1]) return a.length - 1;
 
@@ -65,10 +67,6 @@ public class DiscreteProbabilityDistribution<T> {
             }
         }
         return left;
-    }
-
-    public T quantile(double p, Estimator estimator) {
-        return this.labels[searchLeft(p, this.cumulativeProbabilities, estimator)];
     }
 
     private double[] cumulativeProbabilities() {
@@ -90,7 +88,7 @@ public class DiscreteProbabilityDistribution<T> {
     }
 
     private void checkTotalProbability() {
-        if ((1 - Arrays.stream(this.probabilities).reduce(0., Double::sum)) > tol * this.probabilities.length) {
+        if ((1 - Arrays.stream(this.probabilities).reduce(0., Double::sum)) > TOL * this.probabilities.length) {
             throw new IllegalArgumentException("Probabilities do not sum to 1");
         }
     }
